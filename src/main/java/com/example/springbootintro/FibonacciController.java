@@ -1,5 +1,7 @@
 package com.example.springbootintro;
 
+import java.math.BigInteger;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +17,12 @@ public class FibonacciController {
     }
 
     @PostMapping("/submit")
-    public String handleFormSubmission(@RequestParam String name, @RequestParam String email, Model model) {
-        model.addAttribute("name", name);
-        model.addAttribute("email", email);
+    public String handleFormSubmission(@RequestParam int num, Model model) {
+        Fibonacci fibonacci = new Fibonacci();
+        BigInteger result = fibonacci.calculate(num); // Call Fibonacci class
+
+        model.addAttribute("num", num);
+        model.addAttribute("result", result); // Add result to the model
         return "result"; // Renders result.html
     }
 }
